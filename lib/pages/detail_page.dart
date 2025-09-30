@@ -13,14 +13,15 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  bool _liked = false;
+
   @override
   Widget build(BuildContext context) {
     final animals = dummyAnimals[widget.index]; 
-    bool _liked = false;
-
+    
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  Color(0xFFFE7F2D),
+        backgroundColor: Color(0xFFFE7F2D),
         title: Text(
           animals.name,
           style: const TextStyle(
