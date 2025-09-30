@@ -3,18 +3,24 @@ import 'package:quis_124230037/models/animal_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final int index;
 
   const DetailPage({super.key, required this.index});
 
   @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  @override
   Widget build(BuildContext context) {
-    final animals = dummyAnimals[index]; 
+    final animals = dummyAnimals[widget.index]; 
+    bool _liked = false;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFE7F2D),
+        backgroundColor:  Color(0xFFFE7F2D),
         title: Text(
           animals.name,
           style: const TextStyle(
@@ -22,7 +28,18 @@ class DetailPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+         actions: [
+          IconButton(
+            onPressed: (){ 
+              setState(() {
+                _liked = !_liked;
+              });
+            },
+            icon: Icon(_liked ? Icons.favorite : Icons.favorite_border_outlined, color: Colors.red,) ),
+          
+        ],
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -222,7 +239,11 @@ class DetailPage extends StatelessWidget {
             ),
           ],
         ),
+
       ),
     );
   }
 }
+
+
+
